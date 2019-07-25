@@ -6,7 +6,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', editgoapp.views.home, name="home"),
+    path('', editgoapp.views.index, name="index"),
     path('blog/editor/', editgoapp.views.editor, name="editor"),
     path('blog/<int:blog_id>', editgoapp.views.detail, name="detail"),
     path('creator/<int:creator_id>', editgoapp.views.creatordetail, name="creatordetail"),

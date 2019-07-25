@@ -1,0 +1,118 @@
+{% extends 'base.html' %} {% block content %}
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
+<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans|Quantico:400,700i&display=swap" rel="stylesheet">
+
+<head>
+    <style>
+        .p-4 {
+            margin: 50px 0px 50px 0px;
+            text-align: center;
+        }
+        
+        .welcome {
+            color: white;
+            font-family: 'Open Sans', sans-serif;
+            font-family: 'Quantico', sans-serif;
+        }
+        
+        div>#button1,
+        #button2 {
+            padding: 30px 150px;
+            background-color: white;
+            border-radius: 30%;
+            text-align: center;
+            text-decoration: none;
+        }
+        
+        #button1:hover {
+            background-color: gold;
+            text-decoration: none;
+            color: white;
+        }
+        
+        #button2:hover {
+            background-color: skyblue;
+            text-decoration: none;
+            color: white;
+        }
+        
+        #button1 {
+            color: gold;
+        }
+        
+        .first {
+            background: linear-gradient(to right, #fdc830, #f37335)
+        }
+        
+        .second {
+            background: linear-gradient(to right, #c2e59c, #64b3f4);
+        }
+        
+        @font-face {
+            font-family: 'Goyang';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Goyang.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        .mb-0 {
+            font-family: 'nanum-square';
+            font-size: 30px;
+            font-weight: bold;
+        }
+        
+        @font-face {
+            font-family: 'UhBeeMiMi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_five@.2.0/UhBeeMiMi.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        .mb-auto {
+            font-family: 'UhBeeMiMi';
+            font-size: 25px;
+        }
+        
+        .jumbotron {
+            height: 400px;
+            width: auto;
+        }
+        
+    </style>
+</head>
+<div class="jumbotron p-4">
+    <div class="welcome">
+        <h1 class="welcome">Welcome to <text>Edit Go!</text></h1>
+        <p class="welcome2">Edit go!는 아마추어 동영상 편집자와 예비 크리에이터를 연결해주는 웹 서비스입니다. </p>
+    </div>
+</div>
+
+<div class="row mb-2">
+    <div class=" col-md-6">
+        <div class="first row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+            <div class=" col p-4 d-flex flex-column position-static">
+                <h3 class="mb-0">에디터 구하기</h3>
+                <p></p>
+                <p class="card-text mb-auto">어떤 영상편집을 원하시나요?<br>원하는 편집자를 구해보세요!</p>
+            </div>
+        </div>
+    </div>
+    <div class=" col-md-6">
+        <div class="second row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+            <div class=" col p-4 d-flex flex-column position-static">
+                <h3 class="mb-0">크리에이터 구하기</h3>
+                <p></p>
+                <p class="mb-auto">편집하고자 하는 영상이 있으신가요?<br>당신의 편집 실력을 보여주세요!</p>
+            </div>
+        </div>
+    </div>
+</div>
+<a id="button1" type="button" href="{% url 'editor' %}" class=" btn-outline-warning">Go!</a><span style="margin-right:245px;"></span>
+<a id="button2" type="button" href="{% url 'creator' %}" class=" btn-outline-info">Go!</a>
+<br><br><br>
+<br><br><br>
+
+
+
+{% endblock%}

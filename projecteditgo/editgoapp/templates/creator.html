@@ -1,0 +1,78 @@
+{% extends 'base.html'%} {% block content %}
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"> 
+
+<head>
+    <style type="text/css">
+        .card {
+            float: left;
+            width: 270px;
+            margin-left: 70px;
+            margin-top: 60px;
+            margin-bottom: 60px;
+        }
+        
+        footer {
+            margin: 30px;
+            border-top: 1px solid black;
+        }
+        
+        a {
+            text-decoration: none;
+            color: navy;
+        }
+        
+        .atag {
+            font-family: 'netmarbleB';
+            font-size: 20px;
+            border: 1px none black;
+            text-decoration: none;
+            float:right;
+        }
+        
+        a:hover {
+            color: darkslateblue;
+        }
+        @font-face { font-family: 'netmarbleB'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.1/netmarbleB.woff') format('woff'); font-weight: normal; font-style: normal; }
+        .card-title {
+            font-weight:bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="atag">
+        <a href="{% url 'creatorform' %}">🖋글쓰기</a> 
+    </div> 
+    {% for creator in cposts %}
+
+     <div class="card">
+        <img src="{{creator.image.url}}" alt="이미지 없음" class="card-img-top " height="300">
+        <div class="card-body ">
+            <h5 class="card-title ">{{creator.title}}</h5>
+            <p class="card-text ">소개 : {{creator.sum}}...</p>
+        </div>
+        <div class="card-body ">
+            <a href="{% url 'creatordetail' creator.id %}">더보기</a>
+        </div>
+
+    </div>
+    {% endfor %}
+</body>
+<center>
+<div style="position:relative; bottom:0; clear:both;">
+    <a href="?page=1">First</a>{% if cposts.has_previous %}
+    
+    <a href="?page={{cposts.previous_page_number}}">Previous</a>
+    {% endif %}
+
+    <span>{{cposts.number}}</span>
+    <span>of</span>
+    <span>{{cposts.paginator.num_pages}}</span>
+
+    {% if cposts.has_next %}
+    <a href="?page={{cposts.next_page_number}}">Next</a>
+    
+    {% endif %}<a href="?page={{cposts.paginator.num_pages}}">Last</a>
+</div>
+</center>
+{% endblock %}

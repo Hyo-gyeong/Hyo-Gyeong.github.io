@@ -1,0 +1,77 @@
+{% extends 'base.html'%} {% block content %}
+
+<head>
+    <style type="text/css">
+        .card {
+            float: left;
+            width: 270px;
+            margin-left: 70px;
+            margin-top: 60px;
+            margin-bottom: 60px;
+        }
+        
+        footer {
+            margin: 30px;
+            border-top: 1px solid black;
+        }
+        
+        a {
+            text-decoration: none;
+            color: navy;
+        }
+        
+        .atag {
+            font-size: 20px;
+            border: 1px none black;
+            text-decoration: none;
+            float:right;
+            font-weight:bold;
+        }
+        
+        a:hover {
+            color: darkslateblue;
+        }
+        .card-title {
+            font-weight:bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="atag">
+        <a href="{% url 'editorform' %}">🖋글쓰기</a>  
+    </div>
+    {% for blog in posts %}
+    <div class="card">
+        <img src="{{blog.image.url}}" alt="이미지 없음" class="card-img-top " height=300>
+        <div class="card-body ">
+            <h5 class="card-title ">{{blog.title}}</h5>
+            <p class="card-text ">소개 : {{blog.sum}}...</p>
+        </div>
+        <div class="card-body ">
+            <a href="{% url 'detail' blog.id %}">더보기</a>
+        </div>
+    </div>
+    {% endfor %}
+
+    
+
+</body>
+<center>
+<div style="position:relative; bottom:0; clear:both;">
+    <a href="?page=1">First</a>{% if posts.has_previous %}
+    
+    <a href="?page={{posts.previous_page_number}}">Previous</a>
+    {% endif %}
+
+    <span>{{posts.number}}</span>
+    <span>of</span>
+    <span>{{posts.paginator.num_pages}}</span>
+
+    {% if posts.has_next %}
+    <a href="?page={{posts.next_page_number}}">Next</a>
+    
+    {% endif %}<a href="?page={{posts.paginator.num_pages}}">Last</a>
+</div>
+</center>
+{% endblock %}

@@ -1,0 +1,106 @@
+{% extends 'base.html' %} {% block content %}
+<head>
+    <style>
+    img {
+        margin-bottom:50px;
+        float:right;
+        margin-right:70px;
+        border-radius:50%;
+    }
+    .card-body>h1 {
+        text-align:center;
+        margin-top:180px;
+    }
+    .card-text {
+        float:right;
+        margin-right:25px;
+    }
+    #contents {
+        content-align:center;
+        margin:0px 100px;
+        font-size:20px;
+    }
+    #date{
+        font-style:italic;
+        opacity:0.7;
+        float:right;
+        margin-right:20px;
+    }
+    textarea, ul {
+        margin-left:100px;
+    }
+    ul {
+        padding-left:10px;
+        padding-top:5px;
+        padding-bottom:5px;
+        width:600px;
+        margin-top:10px;
+        border-top:0.1px solid lightgray;
+    }
+    .creply > span {
+        opacity:0.5;
+    }
+    .comment {
+        margin-left:150px;
+    }
+    .creply {
+        border:none;
+        margin-left:200px;
+    }
+    .reply > span {
+        opacity:0.5;
+    }
+    form > span {
+       margin-left:200px;
+       opacity:0.5;
+    }
+    span > input {
+        margin-top:-10px;
+    }
+    </style>
+</head>
+<div class="card">
+    <div class="card-body">
+        <br>
+        <img height="300" width="400" src="{{creator.image.url}}">
+        <h1>{{creator.title}} </h1><br>
+        </div>
+        <div>
+        <p id="contents">{{creator.body}}</p>
+        <br><br>
+        <p> <font id="date">작성날짜 : {{creator.pub_date}}</font></p>
+        <br><br><hr><br>
+        <form method="POST" action="{% url 'creatorcomment_create' creator.id %}">
+            {% csrf_token %}
+            <textarea name = "ccontents" cols="90" rows="4" placeholder=" 댓글을 작성하세요."></textarea>
+            <button type="submit" calss="btn">댓글 작성</button>
+        </form>
+           
+            {% for ccomment in creator.ccomments.all %}
+            <ul style="list-style-type:none;">
+                <li><span>↳</span>{{ccomment.ccontents}} <small><a style="float:right;" href="{% url 'creatorcomment_delete' creator.id ccomment.id %}" class="delete">✖️</a></small></li>
+            </ul>
+
+            <div class="creply">
+                {% for ccommentReply in ccomment.creplys.all %}
+                    <span>↳</span>{{ ccommentReply.ccontents }}<a href="{% url 'creator_comment_reply_delete' creator.id ccomment.id ccommentReply.id %}" class="cdelete"><small style="font-size:7px;">✖️</small></a><br>
+                {% endfor %}
+            </div>
+            <br>
+            <form action="{% url 'creator_comment_reply' creator.id ccomment.id %}" method="POST">
+                {% csrf_token %}
+                <span>↳</span><input type="text" name="ccontents">
+                <button type="submit" class="btn"><small>대댓글 작성</small></button>
+            </form>          
+            {% endfor %}
+        <br>
+        </div>
+        <br>
+    </div>
+    <br>
+    <a class="card-text" href="{% url 'creatordelete' creator.id %}" title="게시글 삭제">🗑️</a>
+    <a class="card-text" href="{% url 'creator'%}" title="뒤로가기">↩</a> <br>
+
+
+
+{% endblock %}
